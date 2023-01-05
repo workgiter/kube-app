@@ -15,8 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class returnData {
 
     @GetMapping(path = "/", produces = "application/json")
-    public String NamesGET() {
-        return "alex, bob, cat, david";
+    public String[] NamesGET() {
+        String[] myarray = new String[5];
+        myarray[0] = "alex";
+        myarray[1] = "bob";
+        myarray[2] = "cat";
+        myarray[3] = "david";
+        myarray[4] = "ethan";
+        return myarray;
+        // return "alex, bob, cat, david, ethan";
     }
 
 }
