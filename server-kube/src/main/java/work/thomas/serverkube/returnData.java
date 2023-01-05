@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.github.javafaker.*;
 
 @RestController
 @RequestMapping(path = "/people")
@@ -16,12 +17,12 @@ public class returnData {
 
     @GetMapping(path = "/", produces = "application/json")
     public String[] NamesGET() {
-        String[] myarray = new String[5];
-        myarray[0] = "alex";
-        myarray[1] = "bob";
-        myarray[2] = "cat";
-        myarray[3] = "david";
-        myarray[4] = "ethan";
+        Faker faker = new Faker();
+        String[] myarray = new String[40];
+        for (int i = 0; i < myarray.length; i++) {
+            myarray[i] = faker.name().fullName();
+            ;
+        }
         return myarray;
         // return "alex, bob, cat, david, ethan";
     }
