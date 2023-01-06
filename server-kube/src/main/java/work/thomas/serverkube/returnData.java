@@ -1,5 +1,6 @@
 package work.thomas.serverkube;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 //import java.net.URI;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/people")
+@CrossOrigin(origins = "http://localhost:3000")
 public class returnData {
 
     @GetMapping(path = "/", produces = "application/json")
