@@ -8,7 +8,7 @@ const EmployeeList = () => {
     let [employeeArray, setEmployeeArray] = useState(temp)
 
     const getEmplyees = () => {
-        fetch('http://localhost:8080/people/')
+        fetch('http://localhost:54490/people/')
         .then(response => response.json())
         .then(data => {
             setEmployeeArray(data);
