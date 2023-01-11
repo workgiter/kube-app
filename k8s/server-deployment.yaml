@@ -13,8 +13,8 @@ spec:
         component: server
     spec:
       containers:
-      - name: server
-        image: server-kube
-        imagePullPolicy: IfNotPresent
-        ports:
-          - containerPort: 8080
+        - name: server
+          image: server-kube
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

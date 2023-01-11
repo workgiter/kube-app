@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import EmployeeCard from "./EmployeeCard";
-import { IEmployeeList, IEmployee , temp } from "../interfaces/IEmployeeList";
+import { temp, IEmployeeList } from "../interfaces/IEmployeeList";
+
+const SERVER_URL = 'http://172.21.3.173:30011/people/';
 
 const EmployeeList = () => {
     //console.log(temp)
     let [employeeArray, setEmployeeArray] = useState(temp)
 
     const getEmplyees = () => {
-        fetch('http://localhost:54490/people/')
+        fetch(SERVER_URL)
         .then(response => response.json())
         .then(data => {
             setEmployeeArray(data);

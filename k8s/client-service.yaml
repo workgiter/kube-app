@@ -4,7 +4,6 @@ metadata:
   labels:
     app: client-kube
   name: client-service
-  namespace: default
 spec:
   type: NodePort
   ports:

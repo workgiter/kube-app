@@ -13,8 +13,8 @@ spec:
         component: web
     spec:
       containers:
-      - name: client
-        image: client-kube
-        imagePullPolicy: IfNotPresent
-        ports:
-          - containerPort: 80
+        - name: client
+          image: client-kube
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
