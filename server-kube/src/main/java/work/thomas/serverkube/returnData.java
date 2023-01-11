@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/people")
 @CrossOrigin(origins = "*")
-public class returnData {
+public class ReturnData {
 
     @GetMapping(path = "/", produces = "application/json")
     public Employees NamesGET() {
