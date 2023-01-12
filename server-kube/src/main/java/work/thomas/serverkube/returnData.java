@@ -27,7 +27,8 @@ public class ReturnData {
     public Employees NamesGET() {
         // Faker faker = new Faker();
         // System.out.println("Data creation started...");
-        employeeRepo.save(new Employee("Whole Wheat Biscuit", "Whole Wheat Biscuit", 5));
+        // employeeRepo.save(new Employee("Whole Wheat Biscuit", "Whole Wheat Biscuit",
+        // 5));
 
         Employees data = new Employees(employeeRepo.findAll());
         // data = employeeRepo.findAll();
