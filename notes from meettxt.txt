@@ -1,6 +1,0 @@
-minikube docker-env | Invoke-Expression
-docker network ls
-
-Docker network set up as host and they all use locak hoast (look up)
-
-VSAddon for git
