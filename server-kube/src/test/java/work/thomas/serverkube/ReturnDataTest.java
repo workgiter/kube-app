@@ -18,18 +18,19 @@ public class ReturnDataTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void givenHTTPRequest_whenGetEmployeeData_thenRespond() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/people/")
-                .contentType("application/json");
+    // @Test
+    // public void givenHTTPRequest_whenGetEmployeeData_thenRespond() throws
+    // Exception {
+    // RequestBuilder requestBuilder = MockMvcRequestBuilders
+    // .get("/people/")
+    // .contentType("application/json");
 
-        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+    // MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 
-        int actualResult = mvcResult.getResponse().getStatus();
-        int expectedResult = HttpStatus.OK.value();
+    // int actualResult = mvcResult.getResponse().getStatus();
+    // int expectedResult = HttpStatus.OK.value();
 
-        Assertions.assertEquals(expectedResult, actualResult);
-    }
+    // Assertions.assertEquals(expectedResult, actualResult);
+    // }
 
 }

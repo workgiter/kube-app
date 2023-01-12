@@ -17,6 +17,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.github.javafaker:javafaker:1.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 }
 
 
