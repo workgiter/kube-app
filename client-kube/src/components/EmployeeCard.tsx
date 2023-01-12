@@ -23,6 +23,9 @@ const EmployeeCard = (props : IProps) => {
                 <Typography>
                     {props.employee.age}
                 </Typography>
+                <p>
+                    hello
+                </p>
             </CardContent>
         </Card>
     )
