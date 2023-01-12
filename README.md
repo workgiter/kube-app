@@ -22,3 +22,4 @@ docker build -t client-kube client-kube
 ##top value for build, bottom for out of minikube testing
 mongodb://mongodb-service:8000/employees
 mongodb://localhost:27017/employees
+

@@ -52,7 +52,6 @@ public class ReturnData {
             // @RequestParam("age") int age)
             @RequestBody String product) throws JsonMappingException, JsonProcessingException {
         System.out.println(product);
-        String asdf = "asdfasdf";
         ObjectMapper mapper = new ObjectMapper();
         // mapper.registerModule(new ParameterNamesModule());
         Employee emp = mapper.readValue(product, Employee.class);
