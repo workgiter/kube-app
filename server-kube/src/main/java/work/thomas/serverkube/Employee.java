@@ -3,6 +3,8 @@ package work.thomas.serverkube;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 @Document("Employee")
 public class Employee {
     @Id
@@ -11,6 +13,9 @@ public class Employee {
     public String name;
     public String email;
     public int age;
+
+    Employee() {
+    }
 
     Employee(String name, String email, int age) {
         this.name = name;

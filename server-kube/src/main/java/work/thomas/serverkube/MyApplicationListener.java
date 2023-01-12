@@ -22,7 +22,7 @@ class MyApplicationListener implements ApplicationListener<ApplicationReadyEvent
         String name;
         String email;
         int age;
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 6; i++) {
             name = faker.name().firstName();
             email = faker.internet().emailAddress();
             age = faker.random().nextInt(10, 100);
