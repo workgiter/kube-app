@@ -1,59 +1,53 @@
 package work.thomas.serverkube;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import java.net.URI;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-// import com.github.javafaker.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 @RestController
 @RequestMapping(path = "/people")
 @CrossOrigin(origins = "*")
 public class ReturnData {
+    /**
+     * has the code to request the database.
+     */
     @Autowired
     EmployeeRepository employeeRepo;
 
+    /**
+     * handles get request and sends back full database to client.
+     *
+     * @return full employee database in json
+     */
     @GetMapping(path = "/", produces = "application/json")
-    public Employees NamesGET() {
-        // Faker faker = new Faker();
-        // System.out.println("Data creation started...");
-        // employeeRepo.save(new Employee("Whole Wheat Biscuit", "Whole Wheat Biscuit",
-        // 5));
-
+    public Employees namesGET() {
         Employees data = new Employees(employeeRepo.findAll());
-        // data = employeeRepo.findAll();
-        return data; // data;
-        // return "alex, bob, cat, david, ethan";
+        return data;
     }
 
+    /**
+     * Function to handle post requests.
+     * Takes in json body, maps into the employee object,
+     * and then saves it to database.
+     *
+     * @param product
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     @PostMapping("/")
     @ResponseBody
-    public void NamePOST(
-            // @RequestParam("name") String name,
-            // @RequestParam("email") String email,
-            // @RequestParam("age") int age)
-            @RequestBody String product) throws JsonMappingException, JsonProcessingException {
-        System.out.println(product);
+    public void namePOST(@RequestBody final String product)
+            throws JsonMappingException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        // mapper.registerModule(new ParameterNamesModule());
         Employee emp = mapper.readValue(product, Employee.class);
         employeeRepo.save(new Employee(emp.name, emp.email, emp.age));
 

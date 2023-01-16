@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 
 import EmployeeCard from "./EmployeeCard";
 import EmployeeImput from "./EmployeeImput";
-import { temp, IEmployeeList } from "../interfaces/IEmployeeList";
+import { temp } from "../interfaces/IEmployeeList";
 
 const SERVER_URL = 'http://172.21.3.173:30011/people/';  //'http://localhost:8080/people/'; 
 
 const EmployeeList = () => {
-    //console.log(temp)
     let [employeeArray, setEmployeeArray] = useState(temp)
 
     const getEmplyees = () => {
