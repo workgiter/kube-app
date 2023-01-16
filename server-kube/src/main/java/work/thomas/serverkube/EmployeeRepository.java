@@ -8,11 +8,28 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepository extends MongoRepository<Employee, String> {
+    /**
+     * return employee from database with given name.
+     *
+     * @param name
+     * @return employee data
+     */
     @Query("{name:'?0'}")
-    public Employee findItemByName(String name);
+    Employee findItemByName(String name);
 
+    /**
+     * return all employess with name.
+     *
+     * @param name
+     * @return list of employees
+     */
     @Query(value = "{name:'?0'}", fields = "{'email' : 1, 'age' : 1}")
-    public List<Employee> findAll(String name);
+    List<Employee> findAll(String name);
 
-    public long count();
+    /**
+     * count enteries.
+     *
+     * @return number
+     */
+    long count();
 }

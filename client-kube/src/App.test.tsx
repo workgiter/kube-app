@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 import App from './App';
 import EmployeeCard from './components/EmployeeCard';
 
-let container : HTMLDivElement;
+let container: HTMLDivElement;
 
 beforeEach(() => {
   container = document.createElement('div');
@@ -14,7 +14,6 @@ beforeEach(() => {
 
 afterEach(() => {
   document.body.removeChild(container);
-  //container = null;
 });
 
 
@@ -26,12 +25,12 @@ test('renders Kubernetes App Java header', () => {
 
 import { IEmployee } from './interfaces/IEmployeeList';
 test('MUI card renders employee data in ', () => {
-  const employee : IEmployee = {  
+  const employee: IEmployee = {
     name: "David",
     email: "David@gmail.com",
     age: 30
   }
-  render(<EmployeeCard  key={1}  employee={employee} />);
+  render(<EmployeeCard key={1} employee={employee} />);
 
   const cardElement = screen.getByText("David");
   expect(cardElement).toBeInTheDocument();
@@ -46,13 +45,12 @@ import EmployeeList from './components/EmployeeList';
 test('create list of cards once given empoyee data', () => {
 
   global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(temp)
+    json: () => Promise.resolve(temp)
   })) as jest.Mock;
 
   act(() => {
     ReactDOM.createRoot(container).render(<EmployeeList />);
   });
-  //const {container } = render(<EmployeeList />)
 
   const cardList = container.getElementsByClassName("MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-o71an5-MuiPaper-root-MuiCard-root");
   expect(cardList.length).toEqual(40);
@@ -65,16 +63,15 @@ test('makes API call after page load', async () => {
     ]
   }
   global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(temp2)
+    json: () => Promise.resolve(temp2)
   })) as jest.Mock;
 
   await act(async () => {
     ReactDOM.createRoot(container).render(<EmployeeList />);
     await new Promise((r) => setTimeout(r, 2000));
   });
-  //const {container } = render(<EmployeeList />)
-  
-  
+
+
   const cardElement = screen.getByText("This is a succesful called load");
   expect(cardElement).toBeInTheDocument();
 })
