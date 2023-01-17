@@ -9,6 +9,14 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 ##start minikube (use powershell as administrator)
 minikube start --driver=hyperv 
 
+##enables ingress and ingress-dns in minikube
+minikube addons enable ingress
+minikube addons enable ingress-dns
+
+#creates DNS rule for current minikube IP
+Get-DnsClientNrptRule | Where-Object {$_.Namespace -eq '.test'} | Remove-DnsClientNrptRule -Force; Add-DnsClientNrptRule -Namespace ".test" -NameServers "$(minikube ip)"
+
+
 ##open docker insider the minikube enviroment
 & minikube -p minikube docker-env --shell powershell | Invoke-Expression
 

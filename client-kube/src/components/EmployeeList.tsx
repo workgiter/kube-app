@@ -4,25 +4,26 @@ import EmployeeCard from "./EmployeeCard";
 import EmployeeImput from "./EmployeeImput";
 import { temp } from "../interfaces/IEmployeeList";
 
-const SERVER_URL = 'http://172.21.3.173:30011/people/';  //'http://localhost:8080/people/'; 
+const SERVER_URL = "http://server.test:30011/people/";
+//for out of minikube testing 'http://localhost:8080/people/'; 
 
 const EmployeeList = () => {
     let [employeeArray, setEmployeeArray] = useState(temp)
 
     const getEmplyees = () => {
         fetch(SERVER_URL)
-        .then(response => response.json())
-        .then(data => {
-            setEmployeeArray(data);
-        })
-        .catch(error => {});
+            .then(response => response.json())
+            .then(data => {
+                setEmployeeArray(data);
+            })
+            .catch(error => { });
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getEmplyees()
     }, [])
 
-    const addEmployee = (name : string, email : string, age : number) => {
+    const addEmployee = (name: string, email: string, age: number) => {
         fetch(SERVER_URL, {
             method: 'POST',
             headers: {
@@ -31,20 +32,20 @@ const EmployeeList = () => {
             },
             body: JSON.stringify(
                 {
-                    "name": name, 
+                    "name": name,
                     "email": email,
-                    "age":age
+                    "age": age
                 }
             )
-        }).then(()=>{getEmplyees()})
+        }).then(() => { getEmplyees() })
     }
 
-    return(
+    return (
         <div>
-            <EmployeeImput addEmployee={addEmployee}  />
-            {employeeArray.employees.map((employee, index):any => {
-                return(
-                    <EmployeeCard 
+            <EmployeeImput addEmployee={addEmployee} />
+            {employeeArray.employees.map((employee, index): any => {
+                return (
+                    <EmployeeCard
                         key={index}
                         employee={employee}
                     />
