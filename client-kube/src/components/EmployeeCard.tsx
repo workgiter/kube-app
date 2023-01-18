@@ -11,7 +11,7 @@ interface IProps {
 const EmployeeCard = (props: IProps) => {
 
     return (
-        <Card sx={{ maxWidth: 300, margin: 1 }}>
+        <Card sx={{ width: 300, margin: 1 }}>
             <CardContent>
                 <Typography>
                     {props.employee.name}

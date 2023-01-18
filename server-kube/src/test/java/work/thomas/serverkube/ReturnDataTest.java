@@ -45,15 +45,18 @@ public class ReturnDataTest {
     public void testPOST() {
         try {
             final int agePram = 10;
-            final Employee exampleEmployee = new Employee("name", "email", agePram);
+            final Employee exampleEmployee =
+             new Employee("name", "email", agePram);
 
             when(employeeRepository.save(exampleEmployee))
-                    .thenReturn(exampleEmployee);
+            .thenReturn(exampleEmployee);
 
             returnData.namePOST(
-                    "{\"name\":\"name\",\"email\":\"email\",\"age\":10}");
+                "{\"name\":\"name\",\"email\":\"email\",\"age\":10}"
+            );
 
-            ArgumentCaptor<Employee> savedCaptor = ArgumentCaptor.forClass(Employee.class);
+            ArgumentCaptor<Employee> savedCaptor =
+             ArgumentCaptor.forClass(Employee.class);
 
             verify(employeeRepository).save(savedCaptor.capture());
             assertTrue(savedCaptor.getValue().name.equals("name"));
