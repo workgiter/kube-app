@@ -4,3 +4,11 @@ docker network ls
 Docker network set up as host and they all use locak hoast (look up)
 
 VSAddon for git
+===========-=-=-=-=-=-=-=-==========
+Mock just tests
+
+classToMock = mockvar;
+mockvar = mock(classToMock<>);
+
+
+for post (check what save method is called with and if it was called)
