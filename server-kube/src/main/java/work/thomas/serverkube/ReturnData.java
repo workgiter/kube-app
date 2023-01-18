@@ -20,8 +20,17 @@ public class ReturnData {
     /**
      * has the code to request the database.
      */
-    @Autowired
     EmployeeRepository employeeRepo;
+
+    /**
+     * Set's the employee repo.
+     *
+     * @param newEmployeeRepo
+     */
+    @Autowired
+    public void setEmployeeRepo(final EmployeeRepository newEmployeeRepo) {
+        this.employeeRepo = newEmployeeRepo;
+    }
 
     /**
      * handles get request and sends back full database to client.
