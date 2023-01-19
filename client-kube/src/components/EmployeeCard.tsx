@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material"
+import { Button, Card, CardActions, Typography } from "@mui/material"
 import CardContent from '@mui/material/CardContent';
 
 import { IEmployee } from "../interfaces/IEmployeeList"
@@ -11,7 +11,7 @@ interface IProps {
 const EmployeeCard = (props: IProps) => {
 
     return (
-        <Card sx={{ width: 300, margin: 1 }}>
+        <Card sx={{ maxWidth: 500, margin: 1 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
                     {props.employee.name}
@@ -23,6 +23,10 @@ const EmployeeCard = (props: IProps) => {
                     {props.employee.age}
                 </Typography>
             </CardContent>
+            <CardActions>
+                <Button size="small">Edit</Button>
+                <Button sx={{ float: "right" }} size="small">Delete</Button>
+            </CardActions>
         </Card>
     )
 }
