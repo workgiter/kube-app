@@ -12,7 +12,7 @@ const SERVER_URL = "http://server.test:30011/people/";
 const EmployeeList = () => {
     let [employeeArray, setEmployeeArray] = useState(temp)
     let [pageNum, setPageNum] = useState(0)
-    let pageLen = 15;
+    const pageLen = 15;
 
     const getEmplyees = () => {
         fetch(SERVER_URL)
@@ -66,6 +66,7 @@ const EmployeeList = () => {
             <EmployeeImput addEmployee={addEmployee} />
             <p></p>
             <button onClick={backPage}>previous page</button>
+            <div className="page-num">{pageNum + 1}</div>
             <button onClick={forwardPage}>next page</button>
             <Box sx={css}>
                 {employeeArray.employees
@@ -82,6 +83,7 @@ const EmployeeList = () => {
                     })}
             </Box>
             <button onClick={backPage}>previous page</button>
+            <div className="page-num">{pageNum + 1}</div>
             <button onClick={forwardPage}>next page</button>
         </div>
     )

@@ -13,7 +13,7 @@ const EmployeeCard = (props: IProps) => {
     return (
         <Card sx={{ width: 300, margin: 1 }}>
             <CardContent>
-                <Typography>
+                <Typography variant="h5" component="div">
                     {props.employee.name}
                 </Typography>
                 <Typography>

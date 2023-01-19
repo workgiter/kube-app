@@ -12,17 +12,16 @@ const EmployeeImput = (props: IProps) => {
 
     return (
         <div>
-            <p>Name</p>
+            <p className="inline">Name</p>
             <input value={nameState} onChange={(e) => { setNameState(e.target.value) }}></input>
-            <p>Email</p>
+            <p className="inline">Email</p>
             <input value={emailState} onChange={(e) => { setEmailState(e.target.value) }}></input>
-            <p>Age</p>
+            <p className="inline">Age</p>
             <input value={ageState} onChange={(e) => {
                 if (!isNaN(+e.target.value)) {
                     setAgeState(e.target.value)
                 }
             }}></input>
-            <p></p>
             <button onClick={() => props.addEmployee(nameState, emailState, Number(ageState))}>Add new Employee</button>
         </div>
     )
