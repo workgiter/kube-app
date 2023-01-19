@@ -25,7 +25,6 @@ const EmployeeCard = (props: IProps) => {
             </CardContent>
             <CardActions>
                 <Button size="small">Edit</Button>
-                <Button sx={{ float: "right" }} size="small">Delete</Button>
             </CardActions>
         </Card>
     )
