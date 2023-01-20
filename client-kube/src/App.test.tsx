@@ -26,11 +26,12 @@ test('renders Kubernetes App Java header', () => {
 import { IEmployee } from './interfaces/IEmployeeList';
 test('MUI card renders employee data in ', () => {
   const employee: IEmployee = {
+    id: "adssdfgdsfg",
     name: "David",
     email: "David@gmail.com",
     age: 30
   }
-  render(<EmployeeCard key={1} employee={employee} />);
+  render(<EmployeeCard index={33} setEditIndex={(x: number): void => { }} key={1} employee={employee} />);
 
   const cardElement = screen.getByText("David");
   expect(cardElement).toBeInTheDocument();

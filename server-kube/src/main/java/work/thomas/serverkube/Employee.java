@@ -9,7 +9,7 @@ public class Employee {
      * unique id for data.
      */
     @Id
-    private String id;
+    public String id;
 
     /** name of employee. */
     public String name;
@@ -21,7 +21,8 @@ public class Employee {
     Employee() {
     }
 
-    Employee(final String namePram, final String emailPram, final int agePram) {
+    Employee(final String namePram, final String emailPram,
+            final int agePram) {
         this.name = namePram;
         this.email = emailPram;
         this.age = agePram;

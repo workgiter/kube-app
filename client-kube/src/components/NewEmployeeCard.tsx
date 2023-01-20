@@ -10,13 +10,15 @@ import { IEmployee } from "../interfaces/IEmployeeList"
 // }
 
 interface IProps {
-    addEmployee: (name: string, email: string, age: number) => void
+    addEmployee: (id: string, name: string, email: string, age: number) => void,
+    employee: IEmployee
+    setEditIndex: (x: number) => void
 }
 
 const NewEmployeeCard = (props: IProps) => {
-    let [nameState, setNameState] = useState("")
-    let [emailState, setEmailState] = useState("")
-    let [ageState, setAgeState] = useState("10")
+    let [nameState, setNameState] = useState(props.employee.name)
+    let [emailState, setEmailState] = useState(props.employee.email)
+    let [ageState, setAgeState] = useState(props.employee.age.toString())
 
     return (
         <Card sx={{ maxWidth: 500, margin: 1 }}>
@@ -48,8 +50,14 @@ const NewEmployeeCard = (props: IProps) => {
             <CardActions>
                 <Button
                     size="small"
-                    onClick={() => props.addEmployee(nameState, emailState, Number(ageState))}
-                >Create New Employee</Button>
+                    onClick={() => props.addEmployee(props.employee.id, nameState, emailState, Number(ageState))}
+                >{(props.employee.id === "asdf") ? "Create New Employee" : "Edit Employee"}</Button>
+                {(props.employee.id === "asdf") ? <div></div> :
+                    <Button
+                        size="small"
+                        onClick={() => props.setEditIndex(-1)}
+                    >Cancel</Button>
+                }
             </CardActions>
         </Card>
     )

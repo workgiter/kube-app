@@ -5,7 +5,9 @@ import { IEmployee } from "../interfaces/IEmployeeList"
 
 interface IProps {
     key: number,
-    employee: IEmployee
+    employee: IEmployee,
+    index: number,
+    setEditIndex: (x: number) => void
 }
 
 const EmployeeCard = (props: IProps) => {
@@ -24,7 +26,7 @@ const EmployeeCard = (props: IProps) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Edit</Button>
+                <Button onClick={() => props.setEditIndex(props.index)} size="small">Edit</Button>
             </CardActions>
         </Card>
     )

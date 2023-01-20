@@ -62,4 +62,19 @@ public class ReturnData {
 
     }
 
+    /**
+     * changes data for single employee.
+     *
+     * @param product
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
+    @PostMapping("/edit")
+    @ResponseBody
+    public void editPOST(@RequestBody final String product)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Employee emp = mapper.readValue(product, Employee.class);
+        employeeRepo.save(emp);
+    }
 }
