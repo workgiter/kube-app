@@ -6,9 +6,9 @@ import Grid from "@mui/material/Grid";
 import PageBar from "./PageBar";
 import NewEmployeeCard from "./NewEmployeeCard";
 
-//const SERVER_URL = "http://server.test:30011/people/";
+const SERVER_URL = "http://server.test:30011/people/";
 //for out of minikube testing 
-const SERVER_URL = 'http://localhost:8080/people/';
+//const SERVER_URL = 'http://localhost:8080/people/';
 
 const EmployeeList = () => {
     let [employeeArray, setEmployeeArray] = useState(temp)
