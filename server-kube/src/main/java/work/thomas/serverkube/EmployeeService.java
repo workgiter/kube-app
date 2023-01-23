@@ -49,14 +49,14 @@ public class EmployeeService {
 
     /**
      * edits data for employee in mongodb.
-     * @param product
+     * @param employeeJSON
      * @throws JsonMappingException
      * @throws JsonProcessingException
      */
-    public void editEmployee(final String product)
+    public void editEmployee(final String employeeJSON)
         throws JsonMappingException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        Employee emp = mapper.readValue(product, Employee.class);
+        Employee emp = mapper.readValue(employeeJSON, Employee.class);
         employeeRepo.save(emp);
     }
 }

@@ -52,29 +52,29 @@ public class EmployeeController {
      * Takes in json body, maps into the employee object,
      * and then saves it to database.
      *
-     * @param product
+     * @param employee
      * @throws JsonMappingException
      * @throws JsonProcessingException
      */
     @PostMapping("/")
     @ResponseBody
-    public void namePOST(@RequestBody final String product)
+    public void namePOST(@RequestBody final String employee)
             throws JsonMappingException, JsonProcessingException {
-        employeeService.addNewEmployee(product);
+        employeeService.addNewEmployee(employee);
 
     }
 
     /**
      * changes data for single employee.
      *
-     * @param product
+     * @param employee
      * @throws JsonMappingException
      * @throws JsonProcessingException
      */
     @PostMapping("/edit")
     @ResponseBody
-    public void editPOST(@RequestBody final String product)
+    public void editPOST(@RequestBody final String employee)
             throws JsonMappingException, JsonProcessingException {
-                employeeService.editEmployee(product);
+                employeeService.editEmployee(employee);
     }
 }
