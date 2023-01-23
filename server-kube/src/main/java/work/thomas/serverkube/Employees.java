@@ -12,19 +12,4 @@ public class Employees {
         this.employees = employeeList;
     }
 
-    // Employees(final List<Employee> employeeList) {
-    // // Faker faker = new Faker();
-    // String name;
-    // String email;
-    // int age;
-    // String id;
-
-    // for (int i = 0; i < employeeList.size(); i++) {
-    // name = employeeList.get(i).name;
-    // email = employeeList.get(i).email;
-    // age = employeeList.get(i).age;
-    // id = employeeList.get(i).id;
-    // employees.add(new Employee(name, email, age, id));
-    // }
-    // }
 }
