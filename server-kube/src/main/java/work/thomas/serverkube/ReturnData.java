@@ -58,7 +58,8 @@ public class ReturnData {
             throws JsonMappingException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Employee emp = mapper.readValue(product, Employee.class);
-        employeeRepo.save(new Employee(emp.name, emp.email, emp.age));
+        employeeRepo.save(
+                new Employee(emp.getName(), emp.getEmail(), emp.getAge()));
 
     }
 

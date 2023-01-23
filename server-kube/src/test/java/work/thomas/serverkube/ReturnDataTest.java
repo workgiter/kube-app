@@ -45,23 +45,20 @@ public class ReturnDataTest {
     public void testPOST() {
         try {
             final int agePram = 10;
-            final Employee exampleEmployee =
-             new Employee("name", "email", agePram);
+            final Employee exampleEmployee = new Employee("name", "email", agePram);
 
             when(employeeRepository.save(exampleEmployee))
-            .thenReturn(exampleEmployee);
+                    .thenReturn(exampleEmployee);
 
             returnData.namePOST(
-                "{\"name\":\"name\",\"email\":\"email\",\"age\":10}"
-            );
+                    "{\"name\":\"name\",\"email\":\"email\",\"age\":10}");
 
-            ArgumentCaptor<Employee> savedCaptor =
-             ArgumentCaptor.forClass(Employee.class);
+            ArgumentCaptor<Employee> savedCaptor = ArgumentCaptor.forClass(Employee.class);
 
             verify(employeeRepository).save(savedCaptor.capture());
-            assertTrue(savedCaptor.getValue().name.equals("name"));
-            assertTrue(savedCaptor.getValue().email.equals("email"));
-            assertTrue(savedCaptor.getValue().age == agePram);
+            assertTrue(savedCaptor.getValue().getName().equals("name"));
+            assertTrue(savedCaptor.getValue().getEmail().equals("email"));
+            assertTrue(savedCaptor.getValue().getAge() == agePram);
 
         } catch (JsonMappingException e) {
             // TODO Auto-generated catch block

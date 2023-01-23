@@ -3,20 +3,25 @@ package work.thomas.serverkube;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Document("Employee")
 public class Employee {
     /**
      * unique id for data.
      */
     @Id
-    public String id;
+    private String id;
 
     /** name of employee. */
-    public String name;
+    private String name;
     /** email of the employee. */
-    public String email;
+    private String email;
     /** age of the emplyee. */
-    public int age;
+    private int age;
 
     Employee() {
     }
