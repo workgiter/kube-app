@@ -14,10 +14,10 @@ import org.mockito.MockitoAnnotations;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-public class ReturnDataTest {
+public class EmployeeServiceTest {
 
     /** making return data object for use in testing. */
-    ReturnData returnData;
+    EmployeeService returnData;
 
     /** Mock mongodb repository for employee data. */
     @Mock
@@ -27,14 +27,16 @@ public class ReturnDataTest {
     @BeforeEach
     public void setupMock() {
         MockitoAnnotations.openMocks(this);
-        returnData = new ReturnData();
+        returnData = new EmployeeService();
         returnData.setEmployeeRepo(employeeRepository);
     }
 
     /** tests get request function to see if data is in the right format. */
     @Test
     public void testGET() {
-        Assertions.assertTrue(returnData.namesGET() instanceof Employees);
+        Assertions.assertTrue(
+            returnData.getEmployeesData() instanceof Employees
+        );
     }
 
     /**
@@ -45,15 +47,18 @@ public class ReturnDataTest {
     public void testPOST() {
         try {
             final int agePram = 10;
-            final Employee exampleEmployee = new Employee("name", "email", agePram);
+            final Employee exampleEmployee =
+             new Employee("name", "email", agePram);
 
             when(employeeRepository.save(exampleEmployee))
-                    .thenReturn(exampleEmployee);
+            .thenReturn(exampleEmployee);
 
-            returnData.namePOST(
-                    "{\"name\":\"name\",\"email\":\"email\",\"age\":10}");
+            returnData.addNewEmployee(
+                "{\"name\":\"name\",\"email\":\"email\",\"age\":10}"
+            );
 
-            ArgumentCaptor<Employee> savedCaptor = ArgumentCaptor.forClass(Employee.class);
+            ArgumentCaptor<Employee> savedCaptor =
+             ArgumentCaptor.forClass(Employee.class);
 
             verify(employeeRepository).save(savedCaptor.capture());
             assertTrue(savedCaptor.getValue().getName().equals("name"));

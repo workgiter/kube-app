@@ -1,5 +1,6 @@
 package work.thomas.serverkube;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,26 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping(path = "/people")
 @CrossOrigin(origins = "*")
-public class ReturnData {
-    /**
-     * has the code to request the database.
-     */
-    EmployeeRepository employeeRepo;
+public class EmployeeController {
 
-    /**
-     * Set's the employee repo.
-     *
-     * @param newEmployeeRepo
-     */
+    /**service to transform and interact with mongodb. */
     @Autowired
-    public void setEmployeeRepo(final EmployeeRepository newEmployeeRepo) {
-        this.employeeRepo = newEmployeeRepo;
-    }
+    EmployeeService employeeService; // = new EmployeeService();
+
+    // /**asdf. */
+    // EmployeeController() {
+    //     employeeService = new EmployeeService();
+    // }
+
+    // /**
+    //  * Set's the employee service.
+    //  *
+    //  * @param newEmployeeService
+    //  */
+    // public void setEmployeeRepo(final EmployeeService newEmployeeService) {
+    //     this.employeeService = newEmployeeService;
+    // }
 
     /**
      * handles get request and sends back full database to client.
@@ -39,8 +43,8 @@ public class ReturnData {
      */
     @GetMapping(path = "/", produces = "application/json")
     public Employees namesGET() {
-        Employees data = new Employees(employeeRepo.findAll());
-        return data;
+        //Employees data = new Employees(employeeRepo.findAll());
+        return employeeService.getEmployeesData();
     }
 
     /**
@@ -56,10 +60,7 @@ public class ReturnData {
     @ResponseBody
     public void namePOST(@RequestBody final String product)
             throws JsonMappingException, JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        Employee emp = mapper.readValue(product, Employee.class);
-        employeeRepo.save(
-                new Employee(emp.getName(), emp.getEmail(), emp.getAge()));
+        employeeService.addNewEmployee(product);
 
     }
 
@@ -74,8 +75,6 @@ public class ReturnData {
     @ResponseBody
     public void editPOST(@RequestBody final String product)
             throws JsonMappingException, JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        Employee emp = mapper.readValue(product, Employee.class);
-        employeeRepo.save(emp);
+                employeeService.editEmployee(product);
     }
 }
