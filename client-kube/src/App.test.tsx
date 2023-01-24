@@ -31,7 +31,15 @@ test('MUI card renders employee data in ', () => {
     email: "David@gmail.com",
     age: 30
   }
-  render(<EmployeeCard index={33} setEditIndex={(x: number): void => { }} key={1} employee={employee} />);
+  render(
+    <EmployeeCard
+      index={33}
+      deleteEmployee={(x: string): void => { }}
+      setEditIndex={(x: string): void => { }}
+      key={1}
+      employee={employee}
+    />
+  );
 
   const cardElement = screen.getByText("David");
   expect(cardElement).toBeInTheDocument();

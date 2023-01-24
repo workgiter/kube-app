@@ -12,7 +12,7 @@ const SERVER_URL = "http://server.test:30011/people/";
 
 const EmployeeList = () => {
     let [employeeArray, setEmployeeArray] = useState(temp)
-    let [editIndex, setEditIndex] = useState(-1)
+    let [editIndex, setEditIndex] = useState("")
     let [pageNum, setPageNum] = useState(0)
     const pageLen = 15;
 
@@ -47,7 +47,7 @@ const EmployeeList = () => {
                 "email": email,
                 "age": age
             }
-            setEditIndex(-1)
+            setEditIndex("")
         }
         fetch(useServerURL, {
             method: 'POST',
@@ -59,22 +59,26 @@ const EmployeeList = () => {
         }).then(() => { getEmplyees() })
     }
 
-    let backPage = (pageNum: number) => {
+    const deleteEmployee = (id: string) => {
+        let useServerURL = SERVER_URL + id;
+        fetch(useServerURL, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => { getEmplyees() })
+    }
+
+    const backPage = (pageNum: number) => {
         if (pageNum > 0) { setPageNum(pageNum - 1) }
     }
 
-    let forwardPage = (pageNum: number) => {
+    const forwardPage = (pageNum: number) => {
         if ((pageNum + 1) * pageLen <= employeeArray.employees.length + 1) {
             setPageNum(pageNum + 1)
         }
     }
-
-    // let css = {
-    //     display: "grid",
-    //     gridTemplateColumns: "repeat(auto-fill, 301px)", //the width of the card 
-    //     justifyContent: "center",
-    //     gridGap: "20px",
-    // }
 
     return (
         <div>
@@ -91,18 +95,19 @@ const EmployeeList = () => {
                     .map((employee, index): any => {
                         return (
                             <Grid item xs={12} sm={6} md={4}>
-                                {((pageNum * pageLen + index === employeeArray.employees.length) || (pageNum * pageLen + index === editIndex)) ?
+                                {(("asdf" === employee.id) || (employee.id === editIndex)) ?
                                     <NewEmployeeCard
                                         addEmployee={addEmployee}
                                         employee={employee}
                                         key={pageNum * pageLen + index}
-                                        setEditIndex={(x: number) => setEditIndex(x)}
+                                        setEditIndex={(x: string) => setEditIndex(x)}
                                     /> :
                                     <EmployeeCard
                                         key={pageNum * pageLen + index}
                                         index={pageNum * pageLen + index}
-                                        setEditIndex={(x: number) => setEditIndex(x)}
+                                        setEditIndex={(x: string) => setEditIndex(x)}
                                         employee={employee}
+                                        deleteEmployee={deleteEmployee}
                                     />}
                             </Grid>
                         )

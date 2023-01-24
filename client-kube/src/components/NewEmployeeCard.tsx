@@ -1,18 +1,13 @@
-import { Button, Card, CardActions, TextField, Typography } from "@mui/material"
+import { Button, Card, CardActions, TextField } from "@mui/material"
 import CardContent from '@mui/material/CardContent';
 import { useState } from "react";
 
 import { IEmployee } from "../interfaces/IEmployeeList"
 
-// interface IProps {
-//     key: number,
-//     employee: IEmployee
-// }
-
 interface IProps {
     addEmployee: (id: string, name: string, email: string, age: number) => void,
     employee: IEmployee
-    setEditIndex: (x: number) => void
+    setEditIndex: (x: string) => void
 }
 
 const NewEmployeeCard = (props: IProps) => {
@@ -55,7 +50,7 @@ const NewEmployeeCard = (props: IProps) => {
                 {(props.employee.id === "asdf") ? <div></div> :
                     <Button
                         size="small"
-                        onClick={() => props.setEditIndex(-1)}
+                        onClick={() => props.setEditIndex("")}
                     >Cancel</Button>
                 }
             </CardActions>

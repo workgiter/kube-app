@@ -7,7 +7,8 @@ interface IProps {
     key: number,
     employee: IEmployee,
     index: number,
-    setEditIndex: (x: number) => void
+    setEditIndex: (x: string) => void
+    deleteEmployee: (x: string) => void
 }
 
 const EmployeeCard = (props: IProps) => {
@@ -26,7 +27,8 @@ const EmployeeCard = (props: IProps) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={() => props.setEditIndex(props.index)} size="small">Edit</Button>
+                <Button onClick={() => props.setEditIndex(props.employee.id)} size="small">Edit</Button>
+                <Button onClick={() => props.deleteEmployee(props.employee.id)} size="small">Delete</Button>
             </CardActions>
         </Card>
     )

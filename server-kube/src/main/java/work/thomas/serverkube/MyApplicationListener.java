@@ -19,7 +19,6 @@ class MyApplicationListener
 
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
-        // TODO Auto-generated method stub
         Faker faker = new Faker();
         String name;
         String email;

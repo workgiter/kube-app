@@ -32,4 +32,9 @@ public interface EmployeeRepository extends MongoRepository<Employee, String> {
      * @return number
      */
     long count();
+
+    /**deletes employee with given id.
+     * @param id id of employee
+     */
+    void deleteById(String id);
 }

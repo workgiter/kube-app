@@ -96,10 +96,10 @@ public class EmployeeService {
     }
 
     /**
-     * kjh.
-     * @param employeeId
+     * delete employee with given id.
+     * @param employeeId id of employee to delete
      */
     public void deleteEmployee(final String employeeId) {
-
+        employeeRepo.deleteById(employeeId);
     }
 }

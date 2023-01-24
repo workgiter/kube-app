@@ -67,11 +67,9 @@ public class EmployeeServiceTest {
             assertTrue(savedCaptor.getValue().getAge() == agePram);
 
         } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             assertTrue(false);
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             assertTrue(false);
         }
@@ -112,7 +110,7 @@ public class EmployeeServiceTest {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             assertTrue(false);
-        } catch (NotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             assertTrue(false);
         }

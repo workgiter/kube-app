@@ -24,7 +24,7 @@ public class EmployeeController {
 
     /**service to transform and interact with mongodb. */
     @Autowired
-    EmployeeService employeeService; // = new EmployeeService();
+    EmployeeService employeeService;
 
     /**
      * handles get request and sends back full database to client.
@@ -76,10 +76,12 @@ public class EmployeeController {
     /**
      * delete employee with employee id from mongodb.
      * @param employeeId
+     * @return employeeID that was deleted
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteEmployee(@PathVariable("id") final String employeeId) {
+    public String deleteEmployee(@PathVariable("id") final String employeeId) {
         employeeService.deleteEmployee(employeeId);
+        return employeeId;
     }
 }
