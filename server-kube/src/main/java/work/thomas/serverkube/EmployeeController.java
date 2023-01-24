@@ -2,12 +2,16 @@ package work.thomas.serverkube;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,28 +26,14 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService; // = new EmployeeService();
 
-    // /**asdf. */
-    // EmployeeController() {
-    //     employeeService = new EmployeeService();
-    // }
-
-    // /**
-    //  * Set's the employee service.
-    //  *
-    //  * @param newEmployeeService
-    //  */
-    // public void setEmployeeRepo(final EmployeeService newEmployeeService) {
-    //     this.employeeService = newEmployeeService;
-    // }
-
     /**
      * handles get request and sends back full database to client.
      *
      * @return full employee database in json
      */
     @GetMapping(path = "/", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public Employees namesGET() {
-        //Employees data = new Employees(employeeRepo.findAll());
         return employeeService.getEmployeesData();
     }
 
@@ -55,12 +45,14 @@ public class EmployeeController {
      * @param employee
      * @throws JsonMappingException
      * @throws JsonProcessingException
+     * @return employee saved to database
      */
     @PostMapping("/")
     @ResponseBody
-    public void namePOST(@RequestBody final String employee)
-            throws JsonMappingException, JsonProcessingException {
-        employeeService.addNewEmployee(employee);
+    @ResponseStatus(HttpStatus.OK)
+    public Employee namePOST(@RequestBody final String employee)
+    throws JsonMappingException, JsonProcessingException {
+        return employeeService.addNewEmployee(employee);
 
     }
 
@@ -70,11 +62,24 @@ public class EmployeeController {
      * @param employee
      * @throws JsonMappingException
      * @throws JsonProcessingException
+     * @return employee edited in database
+     * @throws NotFoundException
      */
     @PostMapping("/edit")
     @ResponseBody
-    public void editPOST(@RequestBody final String employee)
-            throws JsonMappingException, JsonProcessingException {
-                employeeService.editEmployee(employee);
+    @ResponseStatus(HttpStatus.OK)
+    public Employee editPOST(@RequestBody final String employee)
+    throws JsonMappingException, JsonProcessingException {
+        return employeeService.editEmployee(employee);
+    }
+
+    /**
+     * delete employee with employee id from mongodb.
+     * @param employeeId
+     */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteEmployee(@PathVariable("id") final String employeeId) {
+        employeeService.deleteEmployee(employeeId);
     }
 }

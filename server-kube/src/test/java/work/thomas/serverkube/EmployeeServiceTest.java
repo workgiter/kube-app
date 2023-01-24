@@ -1,6 +1,7 @@
 package work.thomas.serverkube;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,7 +51,7 @@ public class EmployeeServiceTest {
             final Employee exampleEmployee =
              new Employee("name", "email", agePram);
 
-            when(employeeRepository.save(exampleEmployee))
+            when(employeeRepository.save(any(Employee.class)))
             .thenReturn(exampleEmployee);
 
             returnData.addNewEmployee(
@@ -71,6 +72,47 @@ public class EmployeeServiceTest {
             assertTrue(false);
         } catch (JsonProcessingException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+            assertTrue(false);
+        }
+    }
+
+    /**test to see if function saves data with right format. */
+    @Test
+    public void testEditEmployee() {
+        try {
+            final int agePram = 10;
+            Employee exampleEmployee =
+                new Employee("name", "email", agePram);
+            exampleEmployee.setId("asdf");
+
+
+            when(employeeRepository.save(any(Employee.class)))
+            .thenReturn(exampleEmployee);
+            when(employeeRepository.existsById("asdf"))
+            .thenReturn(true);
+
+
+            returnData.editEmployee(
+            "{\"id\":\"asdf\",\"name\":\"name\",\"email\":\"email\",\"age\":10}"
+            );
+
+            ArgumentCaptor<Employee> savedCaptor =
+             ArgumentCaptor.forClass(Employee.class);
+
+            verify(employeeRepository).save(savedCaptor.capture());
+            assertTrue(savedCaptor.getValue().getId().equals("asdf"));
+            assertTrue(savedCaptor.getValue().getName().equals("name"));
+            assertTrue(savedCaptor.getValue().getEmail().equals("email"));
+            assertTrue(savedCaptor.getValue().getAge() == agePram);
+
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+            assertTrue(false);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            assertTrue(false);
+        } catch (NotFoundException e) {
             e.printStackTrace();
             assertTrue(false);
         }

@@ -1,6 +1,6 @@
 # Kube-App
 
-##if you haven't already, enable hyper-v
+##if you haven't already, enable hyper-v (use powershell as administrator)
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 
 ##start minikube (use powershell as administrator)
@@ -19,7 +19,7 @@ Get-DnsClientNrptRule | Where-Object {$_.Namespace -eq '.test'} | Remove-DnsClie
 
 & minikube -p minikube docker-env | Invoke-Expression
 
-##navigate to inside the /kube-app directory
+##navigate to inside your /kube-app directory
 
 ##build the docker images for each part of the app
 
@@ -29,9 +29,11 @@ docker build -t server-kube server-kube
 
 docker build -t mongodb .
 
+##uses the yaml files in the k8s folder to create deployment and services based on the docker images.
 kubectl apply -f k8s
 
-minikube services --all
+## Opens up the web client
+minikube service client-service
 
 
 

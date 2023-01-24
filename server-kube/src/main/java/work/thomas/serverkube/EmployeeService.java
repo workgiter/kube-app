@@ -1,7 +1,9 @@
 package work.thomas.serverkube;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -33,18 +35,36 @@ public class EmployeeService {
         return data;
     }
 
+    private void checkEmployeeValid(final Employee emp) {
+        if (emp.getName().equals("")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            "no name sent");
+        }
+        if (emp.getEmail().equals("")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            "no email sent");
+        }
+        if (emp.getAge() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            "age invalid");
+        }
+    }
+
     /**
      * adds new employee to database.
      * @param employeeJSON string json data of employee to be added
      * @throws JsonMappingException
      * @throws JsonProcessingException
+     * @return employee saved to database
      */
-    public void addNewEmployee(final String employeeJSON)
+    public Employee addNewEmployee(final String employeeJSON)
         throws JsonMappingException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Employee emp = mapper.readValue(employeeJSON, Employee.class);
-        employeeRepo.save(
-                new Employee(emp.getName(), emp.getEmail(), emp.getAge()));
+        checkEmployeeValid(emp);
+        return employeeRepo.save(
+            new Employee(emp.getName(), emp.getEmail(), emp.getAge())
+        );
     }
 
     /**
@@ -52,11 +72,34 @@ public class EmployeeService {
      * @param employeeJSON
      * @throws JsonMappingException
      * @throws JsonProcessingException
+     * @return employee edited in database
+     * @throws NotFoundException
      */
-    public void editEmployee(final String employeeJSON)
-        throws JsonMappingException, JsonProcessingException {
+    public Employee editEmployee(final String employeeJSON)
+    throws JsonMappingException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Employee emp = mapper.readValue(employeeJSON, Employee.class);
-        employeeRepo.save(emp);
+        checkEmployeeValid(emp);
+        Employee returnEmp;
+        if (employeeRepo.existsById(emp.getId())) {
+            returnEmp = employeeRepo.save(emp);
+        } else {
+            returnEmp = null;
+        }
+        if (returnEmp == null) {
+            //throw new NotFoundException();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            "ID not found");
+        }
+
+        return returnEmp;
+    }
+
+    /**
+     * kjh.
+     * @param employeeId
+     */
+    public void deleteEmployee(final String employeeId) {
+
     }
 }

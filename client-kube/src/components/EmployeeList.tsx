@@ -30,11 +30,6 @@ const EmployeeList = () => {
     }, [])
 
     const addEmployee = (id: string, name: string, email: string, age: number) => {
-        console.log("called")
-        console.log(id)
-        console.log(name)
-        console.log(email)
-        console.log(age)
         let useServerURL;
         let empData;
         if (id === "asdf") {
