@@ -115,4 +115,19 @@ public class EmployeeServiceTest {
             assertTrue(false);
         }
     }
+
+    /** test the delete employee function
+     * to see if it sends the right datatype
+     * to the reposatory function. */
+    @Test
+    public void testDeleteEmployee() {
+
+        returnData.deleteEmployee("asdf");
+
+        ArgumentCaptor<String> savedCaptor =
+        ArgumentCaptor.forClass(String.class);
+
+       verify(employeeRepository).deleteById(savedCaptor.capture());
+       assertTrue(savedCaptor.getValue().equals("asdf"));
+    }
 }
