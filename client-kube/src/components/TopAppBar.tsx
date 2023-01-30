@@ -1,6 +1,9 @@
 import { AppBar, Box, IconButton, MenuItem, Popover, TextField, Toolbar, Typography } from "@mui/material";
 import React, { useState } from "react";
 
+const SERVER_URL = "http://server.test:30011/people/";
+//for out of minikube testing 
+//const SERVER_URL = 'http://localhost:8080/people/';
 
 interface IUserDetails {
     username: string,
@@ -28,12 +31,34 @@ const TopAppBar = (props: IProps) => {
     };
 
     const mountUserDetails = () => {
-        props.setUserDetails({
-            username: username,
-            password: password
-        })
-        setUsername("")
-        setPassword("")
+        let useServerURL = SERVER_URL + "auth_test";
+        fetch(useServerURL, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Authorization": 'Basic ' + window.btoa(
+                    username
+                    + ":"
+                    + password
+                )
+            }
+        }).then((x) => {
+            if (x.status == 200) {
+                console.log(x)
+                props.setUserDetails({
+                    username: username,
+                    password: password
+                })
+            } else {
+                alert("Login failed!");
+            }
+            setUsername("")
+            setPassword("")
+        }
+        )
+            .catch(() => { alert("Login failed!"); })
+
     }
 
     const unmountUserDetails = () => {
