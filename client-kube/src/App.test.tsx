@@ -58,7 +58,7 @@ test('create list of cards once given empoyee data', () => {
   })) as jest.Mock;
 
   act(() => {
-    ReactDOM.createRoot(container).render(<EmployeeList />);
+    ReactDOM.createRoot(container).render(<EmployeeList userDetails={{ 'username': "", 'password': "" }} />);
   });
 
   const cardList = container.getElementsByClassName("MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-o71an5-MuiPaper-root-MuiCard-root");
@@ -76,7 +76,7 @@ test('makes API call after page load', async () => {
   })) as jest.Mock;
 
   await act(async () => {
-    ReactDOM.createRoot(container).render(<EmployeeList />);
+    ReactDOM.createRoot(container).render(<EmployeeList userDetails={{ 'username': "", 'password': "" }} />);
     await new Promise((r) => setTimeout(r, 2000));
   });
 
