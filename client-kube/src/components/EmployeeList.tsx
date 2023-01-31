@@ -10,7 +10,16 @@ const SERVER_URL = "http://server.test:30011/people/";
 //for out of minikube testing 
 //const SERVER_URL = 'http://localhost:8080/people/';
 
-const EmployeeList = () => {
+interface IUserDetails {
+    username: string,
+    password: string
+}
+
+interface IProps {
+    userDetails: IUserDetails
+}
+
+const EmployeeList = (props: IProps) => {
     let [employeeArray, setEmployeeArray] = useState(temp)
     let [editIndex, setEditIndex] = useState("")
     let [pageNum, setPageNum] = useState(0)
@@ -65,7 +74,12 @@ const EmployeeList = () => {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": 'Basic ' + window.btoa(
+                    props.userDetails.username
+                    + ":"
+                    + props.userDetails.password
+                )
             }
         }).then(() => { getEmplyees() })
     }

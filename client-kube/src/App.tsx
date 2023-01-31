@@ -1,21 +1,18 @@
 import "./App.css";
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import EmployeeList from "./components/EmployeeList";
+import { useState } from "react";
+import React from "react";
+import TopAppBar from "./components/TopAppBar";
 
 function App() {
+
+  let [userDetails, setUserDetails] = useState({ username: "", password: "" })
+
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
-            Kubernetes App Java
-          </Typography>
-        </AppBar>
-      </Box>
-      <EmployeeList />
+      <TopAppBar userDetails={userDetails} setUserDetails={setUserDetails} />
+      <EmployeeList userDetails={userDetails} />
     </div>
   );
 }
